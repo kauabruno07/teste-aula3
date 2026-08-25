@@ -1,13 +1,461 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Testando o html"
+    <title>Espaço Beleza</title>
+    <style>
+        :root {
+            --primary: #04d2da;
+            --primary-hover: #07c4a4;
+            --dark: #1a1a1a;
+            --light: #fefae0;
+            --bg-secondary: #faedcd;
+            --gray: #666666;
+            --transition: all 0.3s ease;
+        }
 
-    <title>Espaço Beleza</title>  
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--dark);
+            background-color: #fff;
+            line-height: 1.6;
+        }
+
+        /* Header & Navegação */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--dark);
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding: 0 1rem;
+            margin-top: 60px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        /* Seções Gerais */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title div {
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary);
+            margin: 0 auto;
+        }
+
+        /* Serviços */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            border: 1px solid #f0f0f0;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .service-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .service-info {
+            padding: 1.5rem;
+        }
+
+        .service-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .service-info p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-price {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        /* Sobre Nós */
+        .about {
+            background-color: var(--bg-secondary);
+            max-width: 100%;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .about-text h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        /* Formulário de Agendamento */
+        .booking {
+            background: #fff;
+        }
+
+        .booking-form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            padding: 0.8rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus, 
+        .form-group select:focus, 
+        .form-group textarea:focus {
+            border-color: var(--primary);
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: var(--dark);
+            color: #fff;
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .footer-column p, .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.5rem; }
+            .about-container { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
-    
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">Aura<span>.</span></div>
+            <ul class="nav-links">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#agendamento">Agendamento</a></li>
+            </ul>
+            <a href="#agendamento" class="btn">Agendar Agora</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="hero" id="home">
+        <div class="hero-content">
+            <h1>Realce sua beleza natural</h1>
+            <p>Tratamentos estéticos avançados e cuidados exclusivos para seu bem-estar.</p>
+            <a href="#servicos" class="btn">Conheça nossos serviços</a>
+        </div>
+    </div>
+
+    <!-- Serviços -->
+    <section id="servicos">
+        <div class="section-title">
+            <h2>Nossos Serviços</h2>
+            <div></div>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="service-info">
+                    <h3>Limpeza de Pele</h3>
+                    <p>Tratamento profundo para remoção de impurezas e renovação celular.</p>
+                    <div class="service-price">R$ 150,00</div>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="service-info">
+                    <h3>Massagem Relaxante</h3>
+                    <p>Alívio de tensões musculares com óleos essenciais terapêuticos.</p>
+                    <div class="service-price">R$ 180,00</div>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="service-info">
+                    <h3>Design de Sobrancelhas</h3>
+                    <p>Modelagem personalizada para harmonização do olhar.</p>
+                    <div class="service-price">R$ 80,00</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Nós -->
+    <div class="about" id="sobre">
+        <section>
+            <div class="about-container">
+                <img src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=800&q=80" alt="Espaço do studio" class="about-img">
+                <div class="about-text">
+                    <h2>Um refúgio de autocuidado para você</h2>
+                    <p>No Aura Studio, acreditamos que a beleza vem do equilíbrio entre corpo e mente. Nosso espaço foi projetado para oferecer uma experiência de relaxamento completa.</p>
+                    <p>Com profissionais altamente qualificadas e os melhores produtos do mercado, garantimos resultados excepcionais focados na sua individualidade.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Agendamento -->
+    <section id="agendamento" class="booking">
+        <div class="section-title">
+            <h2>Faça seu Agendamento</h2>
+            <div></div>
+        </div>
+        <form class="booking-form" onsubmit="handleBooking(event)">
+            <div class="form-group">
+                <label for="name">Nome Completo</label>
+                <input type="text" id="name" required placeholder="Seu nome">
+            </div>
+            <div class="form-group">
+                <label for="phone">Telefone / WhatsApp</label>
+                <input type="tel" id="phone" required placeholder="(11) 99999-9999">
+            </div>
+            <div class="form-group">
+                <label for="service">Serviço Desejado</label>
+                <select id="service" required>
+                    <option value="">Selecione um serviço</option>
+                    <option value="limpeza">Limpeza de Pele</option>
+                    <option value="massagem">Massagem Relaxante</option>
+                    <option value="sobrancelha">Design de Sobrancelhas</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="date">Data Preferencial</label>
+                <input type="date" id="date" required>
+            </div>
+            <button type="submit" class="btn" style="width: 100%;">Confirmar Agendamento</button>
+        </form>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>Aura Studio</h4>
+                <p>Seu espaço de beleza, saúde e bem-estar no centro da cidade.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Contato</h4>
+                <p>📍 Av. Principal, 1000 - Centro</p>
+                <p>📞 (11) 99999-9999</p>
+                <p>✉️ contato@aurastudio.com</p>
+            </div>
+            <div class="footer-column">
+                <h4>Horário de Atendimento</h4>
+                <p>Terça a Sexta: 09h às 19h</p>
+                <p>Sábado: 08h às 17h</p>
+                <p>Domingo e Segunda: Fechado</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Aura Studio. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        function handleBooking(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const service = document.getElementById('service').options[document.getElementById('service').selectedIndex].text;
+            
+            alert(`Obrigado, ${name}! Recebemos sua solicitação para: ${service}. Entraremos em contato via WhatsApp para confirmar a data.`);
+            event.target.reset();
+        }
+    </script>
 </body>
 </html>
